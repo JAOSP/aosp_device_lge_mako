@@ -272,6 +272,7 @@ service hciattach /system/bin/sh /system/etc/init.mako.bt.sh
     class late_start
     user bluetooth
     group qcom_oncrpc bluetooth net_bt_admin system
+    seclabel u:r:bluetooth_loader:s0
     disabled
     oneshot
 
@@ -316,7 +317,7 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     #   user wifi
     #   group wifi inet keystore
     class main
-    socket wpa_wlan0 dgram 660 wifi wifi
+    socket wpa_wlan0 dgram 660 wifi wifi u:object_r:wpa_socket:s0
     disabled
     oneshot
 
@@ -331,7 +332,7 @@ service p2p_supplicant /system/bin/wpa_supplicant \
 #   user wifi
 #   group wifi inet keystore
     class main
-    socket wpa_wlan0 dgram 660 wifi wifi
+    socket wpa_wlan0 dgram 660 wifi wifi u:object_r:wpa_socket:s0
     disabled
     oneshot
 
