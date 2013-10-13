@@ -473,7 +473,7 @@ int wfc_util_fget_string(char *pFileName, char *pEndOfCfg, char *pSTagString, ch
 	char *pSPointer = NULL, *pETagPointer = NULL, *pSValuePointer = NULL;
 
 	/* unused parameter*/
-	pEndOfCfg = pEndOfCfg;
+	(void)pEndOfCfg;
 
 	fd = open( pFileName, O_RDONLY );
 
