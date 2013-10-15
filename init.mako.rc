@@ -207,6 +207,7 @@ on post-fs-data
 
     # communicate with mpdecision and thermald
     mkdir /dev/socket/mpdecision 0770 system system
+    chown root system /dev/socket/mpdecision
     chmod 2770 /dev/socket/mpdecision
 
     # adjust vibrator amplitude
