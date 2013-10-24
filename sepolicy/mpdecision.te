@@ -20,3 +20,26 @@ dontaudit mpdecision self:capability fsetid;
 
 allow mpdecision sysfs_devices_system_cpu:dir search;
 allow mpdecision sysfs_devices_system_cpu:file { open read write getattr };
+allow mpdecision sysfs_mpdecision:dir search;
+allow mpdecision sysfs_mpdecision:file { open read write getattr };
+
+# Some files in /sys/devices/system/cpu may not exist when
+# /sys labeling is done. As a result, they could have the
+# sysfs label, not the sysfs_devices_system_cpu label
+# Allow write access for now until we figure out a better solution.
+# For example, the following files seem to pop in and out of existance
+# /sys/devices/system/cpu/cpu1/cpuinfo_min_freq
+# /sys/devices/system/cpu/cpu1/scaling_min_freq
+allow mpdecision sysfs:file write;
+
+# This is needed to allow mpdecision to create and minipulate
+# the /dev/socket/pb
+# This is too permissive. TODO: revisit this in the future
+allow mpdecision self:capability chown;
+allow mpdecision socket_device:dir { write add_name };
+allow mpdecision socket_device:sock_file { write create setattr };
+
+# This is needed to allow mpdecision to look at system_server's
+# /proc/PID/status file.
+allow mpdecision system_server:dir search;
+allow mpdecision system_server:file r_file_perms;
