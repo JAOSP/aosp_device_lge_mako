@@ -11,12 +11,12 @@ allow mpdecision self:capability net_admin;
 
 # Create under /dev/socket/mpdecision
 allow mpdecision mpdecision_socket:dir w_dir_perms;
-allow mpdecision mpdecision_socket:sock_file { create setattr write };
+allow mpdecision mpdecision_socket:sock_file { create setattr write unlink };
 
 # Also support mpdecision creating the /dev/socket/pb socket
 type_transition mpdecision socket_device:sock_file mpdecision_socket;
 allow mpdecision self:capability chown;
-allow mpdecision socket_device:dir { write add_name };
+allow mpdecision socket_device:dir { write add_name remove_name };
 
 # By-product of setting owner on sock_file (don't allow)
 dontaudit mpdecision self:capability fsetid;
