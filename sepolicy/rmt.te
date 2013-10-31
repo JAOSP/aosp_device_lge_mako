@@ -1,4 +1,4 @@
-# remote storage process
+# remote storage process (runs as nobody)
 type rmt, domain;
 type rmt_exec, exec_type, file_type;
 
@@ -6,4 +6,23 @@ type rmt_exec, exec_type, file_type;
 init_daemon_domain(rmt)
 
 permissive rmt;
-unconfined_domain(rmt)
+
+# opens and reads the primary block device
+allow rmt block_device:blk_file { open read };
+allow rmt block_device:dir search;
+
+# Allow shared memory logging access
+allow rmt shared_log_device:chr_file rw_file_perms;
+
+#
+allow rmt self:socket { create ioctl bind setopt read };
+
+#
+allow rmt cgroup:dir { create add_name };
+
+# Wake lock access
+allow rmt sysfs_wake_lock:file { open append };
+
+# dontallow raw memory access (/dev/kmem and /dev/mem)
+dontaudit rmt kmem_device:file rw_file_perms;
+dontaudit rmt self:capability sys_rawio;
