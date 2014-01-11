@@ -3235,13 +3235,16 @@
       type="mms"
   />
 
-  <apn carrier="Internet"
+  <apn carrier="Orange Internet"
       mcc="260"
       mnc="03"
-      apn="Internet"
+      apn="Internetipv6"
       user="internet"
       password="internet"
-      type="default"
+      authtype="1"
+      type="default,supl"
+      protocol="IPV6"
+      roaming_protocol="IP"
   />
 
   <apn carrier="MMS Orange"
