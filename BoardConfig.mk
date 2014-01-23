@@ -111,6 +111,7 @@ BOARD_SEPOLICY_UNION += \
        rild.te \
        rmt.te \
        sensors.te \
+       serestorecons \
        surfaceflinger.te \
        system_server.te \
        tee.te \
