@@ -80,6 +80,7 @@
 
 # Block labeling
 /dev/block/mmcblk0p[89]            u:object_r:efs_block_device:s0
+/dev/block/mmcblk0                 u:object_r:root_block_device:s0
 
 /data/nfc(/.*)?                    u:object_r:nfc_data_file:s0
 /data/qcks(/.*)?                   u:object_r:kickstart_data_file:s0
